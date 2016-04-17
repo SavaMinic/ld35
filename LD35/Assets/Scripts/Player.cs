@@ -10,11 +10,8 @@ public class Player : MonoBehaviour
 
 	public float Speed { get; private set; }
 
-	private float initialHeight;
-
 	void Start ()
 	{
-		initialHeight = transform.position.y;
 	}
 	
 	void Update ()
