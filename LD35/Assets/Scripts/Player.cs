@@ -10,12 +10,6 @@ public class Player : MonoBehaviour
 
 	public float Speed { get; private set; }
 
-	public float VerticalSpeed { get; private set; }
-
-	public float jumpPower;
-
-	public float gravity;
-
 	private float initialHeight;
 
 	void Start ()
