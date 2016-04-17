@@ -10,23 +10,28 @@ public class Player : MonoBehaviour
 
 	public float Speed { get; private set; }
 
+	public float VerticalSpeed { get; private set; }
+
+	public float jumpPower;
+
+	public float gravity;
+
+	private float initialHeight;
+
 	void Start ()
 	{
-	
+		initialHeight = transform.position.y;
 	}
 	
 	void Update ()
 	{
+		
 
-		Speed += acceleration * Time.deltaTime;
-		Speed = Mathf.Min(Speed, maxSpeed);
+		Vector3 target = transform.position;
 
-		//transform.position += Vector3.right * Speed * Time.deltaTime;
-		transform.position = Vector3.Lerp(transform.position, transform.position + Vector3.right, Speed * Time.deltaTime);
+		Speed = Mathf.Min(Speed + acceleration * Time.deltaTime, maxSpeed);
+		target = Vector3.Lerp(target, target + Vector3.right * Speed, Time.deltaTime);
 
-		if(Input.GetKeyDown(KeyCode.Space))
-		{
-			Debug.Log("SPACE");
-		}
+		transform.position = target;
 	}
 }
