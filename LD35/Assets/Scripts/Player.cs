@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
 	public Sprite turtleSprite;
 
 	public ParticleSystem changeParticles;
+	public ParticleSystem dustParticles;
 
 	public float[] laneYPosition;
 
@@ -37,8 +38,17 @@ public class Player : MonoBehaviour
 
 	void Start ()
 	{
-		SetLane(1);
 		ui = FindObjectOfType<UIManager>();
+		SetLane(1);
+	}
+
+	public void NewGame()
+	{
+		playerSprite.enabled = true;
+		lives = 3; ui.ResetLifes();
+		score = 0; ui.SetScore(score);
+		SetLane(1);
+		dustParticles.Play();
 	}
 
 	
@@ -79,6 +89,7 @@ public class Player : MonoBehaviour
 			if (obstacle.tag == "Rock")
 			{
 				ui.DecreaseLife(--lives);
+				if (lives == 0) Death();
 			}
 			else if ((isRabbit && obstacle.tag == "Carrot") || (!isRabbit && obstacle.tag == "Clover"))
 			{
@@ -87,9 +98,16 @@ public class Player : MonoBehaviour
 			else
 			{
 				ui.DecreaseLife(--lives);
+				if (lives == 0) Death();
 			}
 			obstacle.OnHit();
 		}
+	}
+
+	private void Death()
+	{
+		dustParticles.Stop();
+		playerSprite.enabled = false;
 	}
 
 	#endregion

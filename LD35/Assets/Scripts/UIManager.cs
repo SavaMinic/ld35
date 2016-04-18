@@ -28,11 +28,19 @@ public class UIManager : MonoBehaviour
 		{
 			if (Input.GetKeyUp(KeyCode.Space))
 			{
+				FindObjectOfType<Player>().NewGame();
+				FindObjectOfType<ObstacleManager>().NewGame();
+
 				State = GameState.Playing;
 				startPane.gameObject.SetActive(false);
 				deathPane.gameObject.SetActive(false);
 			}
 		}
+	}
+
+	public void ResetLifes()
+	{
+		for (int i = 0; i < lives.Length; ++i) lives[i].CrossFadeAlpha(1f, 0f, false);
 	}
 
 	public void DecreaseLife(int i)
