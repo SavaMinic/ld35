@@ -26,6 +26,11 @@ public class Player : MonoBehaviour
 	private int currentLane;
 	private float targetY;
 
+	private int lives = 3;
+	private int score = 0;
+
+	private UIManager ui;
+
 	#endregion
 
 	#region Methods
@@ -33,11 +38,14 @@ public class Player : MonoBehaviour
 	void Start ()
 	{
 		SetLane(1);
+		ui = FindObjectOfType<UIManager>();
 	}
 
 	
 	void Update ()
 	{
+		if (!ui.IsPlaying) return;
+
 		if (Input.GetKeyDown(KeyCode.Space))
 		{
 			SwitchChar();
@@ -65,10 +73,21 @@ public class Player : MonoBehaviour
 
 	void OnTriggerEnter2D(Collider2D other)
 	{
-		Debug.LogError("TRIGGER");
 		var obstacle = other.gameObject.GetComponent<Obstacle>();
 		if (obstacle != null)
 		{
+			if (obstacle.tag == "Rock")
+			{
+				ui.DecreaseLife(--lives);
+			}
+			else if ((isRabbit && obstacle.tag == "Carrot") || (!isRabbit && obstacle.tag == "Clover"))
+			{
+				ui.SetScore(++score);
+			}
+			else
+			{
+				ui.DecreaseLife(--lives);
+			}
 			obstacle.OnHit();
 		}
 	}
