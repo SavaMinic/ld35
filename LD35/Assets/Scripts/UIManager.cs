@@ -36,6 +36,10 @@ public class UIManager : MonoBehaviour
 				deathPane.gameObject.SetActive(false);
 			}
 		}
+        if (Input.GetKeyUp(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
 	}
 
 	public void ResetLifes()
