@@ -54,10 +54,23 @@ public class Player : MonoBehaviour
 		Vector3 target = transform.position;
 
 		target = Vector3.Lerp(target, target + Vector3.right, speed * Time.deltaTime);
-
 		target.y = Mathf.Lerp(target.y, targetY, changeSpeed * Time.deltaTime);
 
 		transform.position = target;
+	}
+
+	#endregion
+
+	#region Colliders
+
+	void OnTriggerEnter2D(Collider2D other)
+	{
+		Debug.LogError("TRIGGER");
+		var obstacle = other.gameObject.GetComponent<Obstacle>();
+		if (obstacle != null)
+		{
+			obstacle.OnHit();
+		}
 	}
 
 	#endregion
