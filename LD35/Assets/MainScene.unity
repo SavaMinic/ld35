@@ -470,11 +470,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c6cd717f8ef2af42b31912e44016a15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnTime: 2
   distanceFromPlayer: 24
   playerPosition: {fileID: 1154929215}
   yOffset: -1.20000005
   rockPrefab: {fileID: 101838, guid: 0bccccef090d8ce4eafaf382d5846499, type: 2}
+  carrotsPrefab: {fileID: 101838, guid: be7fc57a8fc953c499bf0dd189f1fd34, type: 2}
+  cloversPrefab: {fileID: 101838, guid: c1921a7a8a371764288c36daeb329df6, type: 2}
 --- !u!1 &1154929214
 GameObject:
   m_ObjectHideFlags: 0
